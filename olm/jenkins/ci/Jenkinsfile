@@ -1,0 +1,14 @@
+@Library('olcne-pipeline') _
+import com.oracle.olcne.pipeline.BranchPattern
+
+String version = "{{{ .major }}}.{{{ .minor }}}.{{{ .patch }}}"
+String imageTag = 'v' + version
+
+imagePipeline(
+        branchPattern: new BranchPattern(master: 'oracle/release/{{{ .major }}}.{{{ .minor }}}.{{{ .patch }}}', feature: 'feature/.*'),
+        containers: [('container-registry.oracle.com/olcne/ceph-csi-operator:' + imageTag ): 'olcne/ceph-csi-operator:' + imageTag],
+        platforms: ['ol9'],
+        enableRepos: ['ol9_appstream'],
+        architectures: ['x86_64', 'aarch64'],
+        buildScript: "sh olm/build-image.sh",
+)
