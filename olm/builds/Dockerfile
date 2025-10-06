@@ -12,7 +12,7 @@ RUN patch < olm/Makefile.patch && \
 FROM container-registry.oracle.com/os/oraclelinux:9-slim
 
 # COPY LICENSE NOTICE THIRD_PARTY_LICENSES.txt olm/SECURITY.md /usr/share/licenses/
-COPY --from=builder /ceph-csi-operator/LICENSE /ceph-csi-operator/olm/SECURITY.md /ceph-csi-operator/ATTRIBUTION-HELPER-DEPS /ceph-csi-operator/THIRD_PARTY_LICENSES.txt /usr/share/licenses/
+COPY --from=builder /ceph-csi-operator/LICENSE /ceph-csi-operator/olm/SECURITY.md /ceph-csi-operator/THIRD_PARTY_LICENSES.txt /usr/share/licenses/
 COPY --from=builder /bin/manager /usr/local/bin/manager
 
 RUN microdnf update -y && \
