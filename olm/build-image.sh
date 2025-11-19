@@ -11,8 +11,8 @@ docker_tag=${registry}/${name}:v${version}-1
 
 ls -lh "/etc/yum.repos.d/"
 if [ -f "/etc/yum.repos.d/ol_artifacts.repo" ]; then
-    cat /etc/yum.repos.d/ol_artifacts.repo
     cp /etc/yum.repos.d/ol_artifacts.repo ./
+    cat ol_artifacts.repo
 fi
 
 "${CONTAINER_CLI}" build --pull \
