@@ -9,7 +9,7 @@ version="0.4.0"
 registry="container-registry.oracle.com/olcne"
 docker_tag=${registry}/${name}:v${version}-1
 
-ls lh "/etc/yum.repos.d/"
+ls -lh "/etc/yum.repos.d/"
 if [ -f "/etc/yum.repos.d/ol_artifacts.repo" ]; then
     cat /etc/yum.repos.d/ol_artifacts.repo
     cp /etc/yum.repos.d/ol_artifacts.repo ./
