@@ -1,6 +1,7 @@
 FROM container-registry.oracle.com/os/oraclelinux:9 AS builder
 
 COPY ol_artifacts.repo /etc/yum.repos.d/
+RUN cat /etc/yum.repos.d/ol_artifacts.repo
 RUN dnf repolist enabled 
 RUN dnf repolist disabled 
 
