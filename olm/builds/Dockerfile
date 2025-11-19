@@ -1,7 +1,8 @@
 FROM container-registry.oracle.com/os/oraclelinux:9 AS builder
 
 COPY *.repo /etc/yum.repos.d/
-RUN dnf repolist
+RUN dnf repolist enabled 
+RUN dnf repolist disabled 
 
 RUN dnf config-manager --enable ol9_codeready_builder && \
     dnf update -y && dnf install --setopt=ol9_appstream.exclude=golang -y golang patch
