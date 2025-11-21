@@ -9,11 +9,13 @@ version="{{{ .major }}}.{{{ .minor }}}.{{{ .patch }}}"
 registry="container-registry.oracle.com/olcne"
 docker_tag=${registry}/${name}:v${version}
 
-if [ -f "/etc/yum.repos.internal.d/ol_artifacts.repo" ]; then
-    cp /etc/yum.repos.internal.d/ol_artifacts.repo ./
-fi
+args=(--build-arg https_proxy=${https_proxy}
+        --build-arg version=${version})
 
-"${CONTAINER_CLI}" build --pull \
-    --build-arg https_proxy=${https_proxy} \
-    --build-arg version=${version} \
-    -t ${docker_tag} -f ./olm/builds/Dockerfile .
+[[ -f /etc/yum.repos.internal.d/ol_artifacts.repo ]] && \
+        args+=(--volume /etc/yum.repos.internal.d/ol_artifacts.repo:/etc/yum.repos.internal.d/ol_artifacts.re
+[[ -f /etc/yum.conf ]] && args+=(--volume /etc/yum.conf:/etc/yum.conf)
+
+args+=(-t ${docker_tag} -f ./olm/builds/Dockerfile .)
+
+"${CONTAINER_CLI}" build --pull "${args[@]}"
