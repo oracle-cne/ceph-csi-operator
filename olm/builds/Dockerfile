@@ -22,4 +22,4 @@ RUN microdnf update -y && \
 
 USER 65532:65532
 
-ENTRYPOINT ["/usr/local/bin/manager"]
+ENTRYPOINT ["/manager"]
