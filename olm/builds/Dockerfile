@@ -13,7 +13,7 @@ FROM container-registry.oracle.com/os/oraclelinux:9-slim
 
 # COPY LICENSE NOTICE THIRD_PARTY_LICENSES.txt olm/SECURITY.md /usr/share/licenses/
 COPY --from=builder /ceph-csi-operator/LICENSE /ceph-csi-operator/olm/SECURITY.md /ceph-csi-operator/THIRD_PARTY_LICENSES.txt /usr/share/licenses/
-COPY --from=builder /ceph-csi-operator/bin/manager /usr/local/bin/manager
+COPY --from=builder /ceph-csi-operator/bin/manager /manager
 
 RUN microdnf update -y && \
     microdnf clean all && \
@@ -22,4 +22,4 @@ RUN microdnf update -y && \
 
 USER 65532:65532
 
-ENTRYPOINT ["/usr/local/bin/manager"]
+ENTRYPOINT ["/manager"]
