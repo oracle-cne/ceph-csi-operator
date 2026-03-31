@@ -1,7 +1,9 @@
 FROM container-registry.oracle.com/os/oraclelinux:9 AS builder
 
+ARG DNF_GOLANG_ARG=""
+
 RUN dnf config-manager --enable ol9_codeready_builder && \
-    dnf update -y && dnf install -y golang patch
+    dnf update -y && dnf install "${DNF_GOLANG_ARG}" -y golang patch
 
 WORKDIR /ceph-csi-operator
 COPY . .
